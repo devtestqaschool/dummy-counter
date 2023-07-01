@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div align="center">
+        <h1 class="display-3">Ваши счетчики</h1>
+    </div>
+    <div class="row">
+        <div class="card m-2" style="width: 23%;" th:each="counter : ${allCounters}">
+                <img class="card-img-top m-2" src="https://freepngimg.com/thumb/categories/2912.png"
+                     style="max-width: 100px"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${counter.getKey()}"></h5>
+                    <p class="card-text" th:text="'Насчитано ' + ${counter.getValue()} + ' раз'"></p>
+                    <div class="row">
+                        <form action="/count" method="POST"
+                              style="width: 25%" class="ml-2">
+                            <button class="btn btn-outline-success" style="width: 100%" name="counterName"
+                                    th:value="${counter.getKey()}">
+                                <img
+                                        style="max-width: 25px"
+                                        src="https://creazilla-store.fra1.digitaloceanspaces.com/icons/3206641/plus-circle-icon-md.png"/>
+                            </button>
+                        </form>
+                        <form action="/reset" method="POST"
+                              style="width: 25%" class="mx-1">
+                            <button class="btn btn-outline-warning" style="width: 100%" name="counterName"
+                                    th:value="${counter.getKey()}">
+                                <img
+                                        style="max-width: 25px"
+                                        src="https://icon-library.com/images/reset-icon-png/reset-icon-png-4.jpg"/>
+                            </button>
+                        </form>
+                        <form action="/delete" method="POST"
+                              style="width: 25%">
+                            <button class="btn btn-outline-danger" style="width: 100%" name="counterName"
+                                    th:value="${counter.getKey()}">
+                                <img
+                                        style="max-width: 25px"
+                                        src="https://cdn-icons-png.flaticon.com/512/860/860829.png"/>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+        </div>
+        <div class="card m-2" style="width: 23%;">
+            <form action="/create" method="POST">
+                <img class="card-img-top m-2" src="https://img.uxwing.com/wp-content/themes/uxwing/download/e-commerce-currency-shopping/new-board-icon.png" style="max-width: 120px"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Новый счетчик</h5>
+                    <p class="card-text">Введите имя нового счетчика</p>
+                    <div class="input-group">
+                        <input type="text" style="width: 75%"  class="form-control" name="counterName"
+                               placeholder="Имя счетчика"/>
+                        <button type="submit" style="width:20%" class="form-control btn btn-outline-success">
+                            <img
+                                    style="max-width: 25px"
+                                    src="https://creazilla-store.fra1.digitaloceanspaces.com/icons/3206641/plus-circle-icon-md.png"/>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
